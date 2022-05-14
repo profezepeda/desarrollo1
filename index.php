@@ -21,7 +21,7 @@
             echo "Hola " . $_SESSION['usuario'];
         }
     ?><br/><br/>
-    <a href="personas.php">Personas</a> &nbsp;
+    <a href="personas/personas.php">Personas</a> &nbsp;
     <a href="logout.php">Cerrar sesión</a> &nbsp;
     <a href="login.php?logout=1">Cerrar sesión 2</a> &nbsp;
 

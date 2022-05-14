@@ -13,7 +13,7 @@
     <div class="row">
 
     <?php
-        require_once './clases/persona.php';
+        require_once '../clases/persona.php';
         $persona = new Persona();
         $personas = $persona->listar();
         while ($reg = $personas->fetch_assoc()) {
@@ -29,6 +29,7 @@
                     </div>
                     <div class="card-text"><?php echo $reg["email"] ?></div>
                     <div class="card-text"><?php echo $reg["rut"] ?></div>
+                    <a href="persona.editar.php?id=<?php echo $reg["idpersona"] ?>" class="btn btn-primary">Editar</a>
                 </div>
             </div>
         </div>
