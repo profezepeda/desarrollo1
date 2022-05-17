@@ -28,8 +28,13 @@ class Persona {
 
     public function agregar() {
         $db = new conexionDB();
-        $query = "INSERT INTO personas VALUES (NULL, '" . $this->nombre . "', '" . $this->apellido . "', '" . $this->fechanacimiento . "', '" . $this->rut . "', '" . $this->email . "')";
-        $db->ejecutar($query);
+        // sin pdo
+        // $query = "INSERT INTO personas VALUES (NULL, '" . $this->nombre . "', '" . $this->apellido . "', '" . $this->fechanacimiento . "', '" . $this->rut . "', '" . $this->email . "')";
+        // $db->ejecutar($query);
+        // con pdo
+        $query = "INSERT INTO personas VALUES (NULL, ?, ?, ?, ?, ?)";
+        $parametros = array($this->nombre, $this->apellido, $this->fechanacimiento, $this->rut, $this->email);
+        $db->ejecutar_pdo($query, $parametros);
         $db->cerrar();
     }
 
