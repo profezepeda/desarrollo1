@@ -22,7 +22,7 @@ class Persona {
     public function listar() {
         $db = new conexionDB();
         $sql = "SELECT * FROM personas";
-        $resultado = $db->ejecutar($sql);
+        $resultado = $db->ejecutar_pdo($sql, array());
         return $resultado;
     }
 
@@ -42,8 +42,12 @@ class Persona {
 
     public function obtener()   {
         $db = new conexionDB();
-        $query = "select * from personas where idpersona = " . $this->idpersona;
-        $resultado = $db->ejecutar($query);
+        // sin pdo
+        //$query = "select * from personas where idpersona = " . $this->idpersona;
+        // $resultado = $db->ejecutar($query);
+        // con pdo
+        $query = "select * from personas where idpersona = ?";
+        $resultado = $db->ejecutar_pdo($query, array($this->idpersona));
         if ($resultado->num_rows > 0) {
             $fila = $resultado->fetch_assoc();
             $this->nombre = $fila["nombre"];
@@ -63,15 +67,23 @@ class Persona {
 
     public function eliminar()  {
         $db = new conexionDB();
-        $query = "DELETE FROM personas WHERE idpersona=" . $this->idpersona;
-        $db->ejecutar($query);
+        // sin pdo
+        // $query = "DELETE FROM personas WHERE idpersona=" . $this->idpersona;
+        // $db->ejecutar($query);
+        // con pdo
+        $query = "DELETE FROM personas WHERE idpersona=?";
+        $db->ejecutar_pdo($query, array($this->idpersona));
         $db->cerrar();
     }
 
     public function eliminarPorId($id)   {
         $db = new conexionDB();
-        $query = "DELETE FROM personas WHERE idpersona=" . $id;
-        $db->ejecutar($query);
+        // sin pdo
+        // $query = "DELETE FROM personas WHERE idpersona=" . $id;
+        // $db->ejecutar($query);
+        // con pdo
+        $query = "DELETE FROM personas WHERE idpersona=?";
+        $db->ejecutar_pdo($query, array($id));
         $db->cerrar();
     }
 

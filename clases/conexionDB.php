@@ -11,16 +11,20 @@ class conexionDB {
         }
     }
 
-    // inseguro
+    // inseguro  -- NO USAR
     public function ejecutar($sql) {
         $resultado = $this->conexion->query($sql);
         return $resultado;
     }
 
-    // PDO - seguro
-    public function pdo($sql, $parametros)  {
+    // PDO - seguro -- USAR
+    public function ejecutar_pdo($sql, $parametros)  {
         $resultado = $this->conexion->prepare($sql);
-        $resultado->execute($parametros);
+        foreach ($parametros as $key => $parametro) {
+            $resultado->bind_param("s", $parametro);
+        }
+        $resultado->execute();
+        $resultado = $resultado->get_result();
         return $resultado;
     }
 
