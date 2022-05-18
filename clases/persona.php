@@ -40,8 +40,13 @@ class Persona {
 
     public function modificar() {
         $db = new conexionDB();
-        $query = "UPDATE personas SET nombre = '" . $this->nombre . "', apellido = '" . $this->apellido . "', fechanacimiento = '" . $this->fechanacimiento . "', rut = '" . $this->rut . "', email = '" . $this->email . "' WHERE idpersona = " . $this->idpersona;
-        $db->ejecutar($query);
+        // sin pdo
+        // $query = "UPDATE personas SET nombre = '" . $this->nombre . "', apellido = '" . $this->apellido . "', fechanacimiento = '" . $this->fechanacimiento . "', rut = '" . $this->rut . "', email = '" . $this->email . "' WHERE idpersona = " . $this->idpersona;
+        // $db->ejecutar($query);
+        // con pdo
+        $query = "UPDATE personas SET nombre = ?, apellido = ?, fechanacimiento = ?, rut = ?, email = ? WHERE idpersona = ?";
+        $parametros = array($this->nombre, $this->apellido, $this->fechanacimiento, $this->rut, $this->email, $this->idpersona);
+        $db->ejecutar_pdo($query, $parametros);
         $db->cerrar();
     }
 
