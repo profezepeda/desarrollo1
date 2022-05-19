@@ -1,5 +1,8 @@
 <?php
-require "../componentes/header.php"
+require_once "../configuracion.ini.php";
+require_once "../funciones.php";
+require $path."componentes/header.php";
+
 ?>
 
     <div class="row">
@@ -30,8 +33,10 @@ require "../componentes/header.php"
         }
     ?>
 
+    <?php echo foo()    ?>
+
     </div>
 
 <?php
-require "../componentes/footer.php"
+require $path."componentes/footer.php"
 ?>

@@ -1,5 +1,7 @@
 <?php
 
+require_once "../configuracion.ini.php";
+require_once "../funciones.php";
 require '../clases/persona.php';
 
 $persona = new Persona();
