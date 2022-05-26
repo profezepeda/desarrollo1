@@ -1,4 +1,7 @@
 <?php
+
+require_once ("clases/usuarios.php");
+
     session_start();
     if (isset($_SESSION['usuario'])) {
         if ($_GET["logout"] == 1) {
@@ -15,16 +18,29 @@
     $usuarioNoValido = null;
 
     if (!empty($_POST)) {
-        $usuario = $_POST['usuario'];
-        $contrasena = $_POST['contrasena'];
+        $username = $_POST['usuario'];
+        $password = $_POST['contrasena'];
 
+        $usuario = new Usuario();
+        $usuarioValido = $usuario->autenticar($username, $password);
+        if ($usuarioValido) {
+            $_SESSION['usuario'] = $usuario;
+            header("Location: index.php");
+            exit();
+        } else {
+            $usuarioNoValido = "Usuario o contraseña incorrectos";
+        }
+
+/*
+        // AUTENTICACIÓN EN DURO
         if ($usuario == 'admin@admin.cl' && $contrasena == 'mayo') {
             $usuarioValido = "Usuario válido";
             $_SESSION["usuario"] = $usuario;
             header("Location: index.php");
         } else {
             $usuarioNoValido = "Usuario no válido";
-        }
+        } */
+
     }
 
 ?>
@@ -80,7 +96,7 @@ DELETE - eliminar datos
                                 </div>
                                 <div class="mb-3">
                                     <?php
-                                        if (!is_null($usuarioValido)) {
+                                        if ($usuarioValido) {
                                     ?>
                                         <div class="alert alert-success" role="alert">
                                             Usuario válido, será redicreccionado/a
@@ -90,7 +106,7 @@ DELETE - eliminar datos
                                     ?>
 
                                     <?php
-                                        if (!is_null($usuarioNoValido))   {
+                                        if (!$usuarioValido)   {
                                     ?>
                                         <div class="alert alert-danger" role="alert">
                                             Usuario/a no válido/a, deberá intentar nuevamente.

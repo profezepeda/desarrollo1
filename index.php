@@ -1,4 +1,7 @@
 <?php
+
+require_once "clases/usuarios.php";
+
     session_start();
     if (!isset($_SESSION['usuario'])) {
         header("Location: login.php");
@@ -18,7 +21,7 @@
     <h1>Soy la página principal</h1>
     <?php
         if (isset($_SESSION['usuario'])) {
-            echo "Hola " . $_SESSION['usuario'];
+            echo "Hola <b>" . $_SESSION['usuario']->firstname . " " . $_SESSION['usuario']->lastname . "</b>";
         }
     ?><br/><br/>
     <a href="personas/personas.php">Personas</a> &nbsp;
