@@ -1,9 +1,30 @@
 <?php
 require_once "../configuracion.ini.php";
 require_once("../clases/clasificaciones.php");
+require_once("../clases/contenidos.php");
 
 $clasificacion = new Clasificaciones();
 $seleccionClasificaciones = $clasificacion->listar();
+
+$idclasificacion = null;
+if (isset($_POST["enviar"]))    {
+    echo $_POST["idclasificacion"];
+    $idclasificacion = $_POST["idclasificacion"];
+}
+if (isset($_GET["idcontenido"]))    {
+
+    $contenido = new Contenidos();
+    // $contenido->idcontenido = $_GET["idcontenido"];
+    // $contenido->obtener()
+    $contenido->idclasificacion = 5;
+
+    $idclasificacion = $contenido->idclasificacion;
+
+
+}
+
+
+
 
 ?>
 <!DOCTYPE html>
@@ -21,12 +42,16 @@ $seleccionClasificaciones = $clasificacion->listar();
         <select name="idclasificacion">
             <?php
             foreach ($seleccionClasificaciones as $key => $value) {
-                echo "<option value='".$value["idclasificacion"]."'>".$value["nombre"]."</option>";
+                $selected = "";
+                if ($value["idclasificacion"] == $idclasificacion)  {
+                    $selected = "selected";
+                }
+                echo "<option value='".$value["idclasificacion"]."' ".$selected.">".$value["nombre"]."</option>";
             }
             ?>
         </select>
 
-
+        <button type="submit" name="enviar">Enviar</button> 
     </form>
 
 

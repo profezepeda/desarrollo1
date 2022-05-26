@@ -16,7 +16,7 @@ class Contenidos {
     public function __construct()   {
 
     }
-
+/* 
     // alternativa 1
     public function obtener()   {
 
@@ -71,7 +71,7 @@ class Contenidos {
 
     public function modificar() {
 
-    }
+    } */
 }
 
 ?>

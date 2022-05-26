@@ -1,7 +1,6 @@
 <?php
 require_once "../configuracion.ini.php";
 require_once "../funciones.php";
-require $path."componentes/header.php";
 require_once "../clases/usuarios.php";
 
 session_start();
@@ -11,7 +10,11 @@ if (!isset($_SESSION['usuario'])) {
     exit();
 }
 
+require $path."componentes/header.php";
+require $path."componentes/slider.php";
+
 ?>
+
 
     <div class="row">
 
